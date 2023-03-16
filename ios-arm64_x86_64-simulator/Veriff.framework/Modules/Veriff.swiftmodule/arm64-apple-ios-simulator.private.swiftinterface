@@ -1,0 +1,173 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
+// swift-module-flags: -target arm64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Veriff
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation.AVAssetWriter
+import AVFoundation
+import AVKit
+import AVFoundation.AVVideoSettings
+import CoreImage.CIImage
+import CommonCrypto
+import CoreAudioTypes.CoreAudioBaseTypes
+import CoreAudioTypes
+import CoreGraphics
+import CoreImage
+import CoreMedia
+import CoreMotion
+import CoreNFC
+import CoreServices
+import Foundation
+import MobileCoreServices
+import SafariServices
+import Swift
+import UIKit.UIApplication
+import UIKit.UIDevice
+import UIKit.UIImage
+import UIKit
+import UniformTypeIdentifiers
+@_exported import Veriff
+import Vision
+import _Concurrency
+import _StringProcessing
+extension Veriff.VeriffSdk {
+  @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc(VeriffBranding) final public class Branding : ObjectiveC.NSObject {
+    @objc(VeriffBrandingFont) final public class Font : ObjectiveC.NSObject {
+      @objc public init(regular: Swift.String, medium: Swift.String, bold: Swift.String)
+      @objc deinit
+    }
+    public typealias LogoProvider = ((@escaping (UIKit.UIImage) -> Swift.Void) -> Swift.Void)
+    @objc final public var logo: UIKit.UIImage?
+    @objc final public var logoProvider: Veriff.VeriffSdk.Branding.LogoProvider?
+    @objc final public var background: UIKit.UIColor?
+    @objc final public var onBackground: UIKit.UIColor?
+    @objc final public var onBackgroundSecondary: UIKit.UIColor?
+    @objc final public var onBackgroundTertiary: UIKit.UIColor?
+    @objc final public var primary: UIKit.UIColor?
+    @objc final public var onPrimary: UIKit.UIColor?
+    @objc final public var secondary: UIKit.UIColor?
+    @objc final public var onSecondary: UIKit.UIColor?
+    @objc final public var outline: UIKit.UIColor?
+    @objc final public var error: UIKit.UIColor?
+    @objc final public var success: UIKit.UIColor?
+    final public var buttonRadius: CoreFoundation.CGFloat?
+    @objc final public var font: Veriff.VeriffSdk.Branding.Font?
+    @available(*, deprecated, message: "No longer available")
+    @objc final public var logomark: UIKit.UIImage?
+    @objc override dynamic public init()
+    @available(swift, obsoleted: 0.1)
+    @objc final public func setButtonRadius(_ buttonRadius: CoreFoundation.CGFloat.NativeType)
+    @objc deinit
+  }
+}
+@objc public protocol VeriffSdkDelegate {
+  @objc func sessionDidEndWithResult(_ result: Veriff.VeriffSdk.Result)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class VeriffSdk : ObjectiveC.NSObject {
+  @_hasMissingDesignatedInitializers @objc(VeriffConfiguration) final public class Configuration : ObjectiveC.NSObject {
+    final public var queryItems: [Foundation.URLQueryItem]?
+    final public let languageLocale: Foundation.Locale?
+    final public let branding: Veriff.VeriffSdk.Branding?
+    @objc final public var customIntroScreen: Swift.Bool
+    @objc public init(branding: Veriff.VeriffSdk.Branding? = nil, languageLocale: Foundation.Locale? = nil)
+    @objc deinit
+  }
+  public enum Status {
+    case done
+    case canceled
+    case error(Veriff.VeriffSdk.Error)
+  }
+  @objc(VeriffStatus) public enum StatusObjC : Swift.Int {
+    case done
+    case canceled
+    case error
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public enum ImplementationType : Swift.String {
+    case core
+    case reactNative
+    case flutter
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  @_hasMissingDesignatedInitializers @objc(VeriffResult) final public class Result : ObjectiveC.NSObject {
+    final public let status: Veriff.VeriffSdk.Status
+    @objc final public let sessionUrl: Foundation.URL
+    @available(swift, obsoleted: 0.1)
+    @objc(status) final public var objcStatus: Veriff.VeriffSdk.StatusObjC {
+      @objc get
+    }
+    @available(swift, obsoleted: 0.1)
+    @objc(error) final public var objcError: Veriff.VeriffSdk.ErrorObjC? {
+      @objc get
+    }
+    @objc override final public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @objc(VeriffErrorCode) public enum Error : Swift.Int, Swift.Equatable {
+    case cameraUnavailable
+    case microphoneUnavailable
+    case serverError
+    case localError
+    case networkError
+    case uploadError
+    case videoFailed
+    case deprecatedSDKVersion
+    case unknown
+    public var errorCode: Swift.Int {
+      get
+    }
+    public static var _nsErrorDomain: Swift.String {
+      get
+    }
+  }
+  @_hasMissingDesignatedInitializers @objc(VeriffError) final public class ErrorObjC : ObjectiveC.NSObject {
+    @objc(code) final public let error: Veriff.VeriffSdk.Error
+    @objc deinit
+  }
+  @objc public static let shared: Veriff.VeriffSdk
+  @objc weak public var delegate: Veriff.VeriffSdkDelegate?
+  public var configuration: Veriff.VeriffSdk.Configuration? {
+    get
+  }
+  public var implementationType: Veriff.VeriffSdk.ImplementationType
+  @objc public func startAuthentication(sessionUrl: Swift.String, configuration: Veriff.VeriffSdk.Configuration?, presentingFrom presentingViewController: UIKit.UIViewController)
+  @objc public func startAuthentication(sessionUrl: Swift.String, presentingFrom presentingViewController: UIKit.UIViewController)
+  @objc public func startAuthentication(sessionUrl: Swift.String, configuration: Veriff.VeriffSdk.Configuration?)
+  @objc public func startAuthentication(sessionUrl: Swift.String)
+  @available(*, deprecated, message: "Use startAuthentication(sessionUrl:configuration:) instead")
+  public func startAuthentication(baseUrl: Swift.String, sessionToken: Swift.String, configuration: Veriff.VeriffSdk.Configuration? = nil)
+  @objc deinit
+}
+extension Veriff.VeriffSdk {
+  public static var customIntroScreen: Swift.Bool {
+    get
+  }
+}
+extension Foundation.URL {
+  public func isValid() -> Swift.Bool
+  public func veriffSessionUrl() -> Foundation.URL?
+}
+extension Veriff.VeriffSdk.Error : Swift.RawRepresentable {
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+  public typealias RawValue = Swift.Int
+}
+extension Veriff.VeriffSdk.Error : Swift.Error {}
+extension Veriff.VeriffSdk.Error : Swift.Hashable {}
+extension Veriff.VeriffSdk.StatusObjC : Swift.Equatable {}
+extension Veriff.VeriffSdk.StatusObjC : Swift.Hashable {}
+extension Veriff.VeriffSdk.StatusObjC : Swift.RawRepresentable {}
+extension Veriff.VeriffSdk.ImplementationType : Swift.Equatable {}
+extension Veriff.VeriffSdk.ImplementationType : Swift.Hashable {}
+extension Veriff.VeriffSdk.ImplementationType : Swift.RawRepresentable {}
